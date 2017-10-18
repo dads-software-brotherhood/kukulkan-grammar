@@ -8,7 +8,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.TokenStream;
 
-import mx.infotec.dads.kukulkan.grammar.parser.*;
+import mx.infotec.dads.kukulkan.grammar.parser.kukulkanLexer;
+import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser;
+import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Between_expressionContext;
+import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Select_clauseContext;
 import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Select_statementContext;
 
 /**
@@ -20,11 +23,10 @@ import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Select_statementCo
 public class Main {
     public static void main(String[] args) {
         try {
-            InputStream inputStream = Main.class.getResourceAsStream("/pyth.txt");
-            Lexer lexer = new kukulkanLexer(CharStreams.fromStream(inputStream));
-            TokenStream tokenStream = new CommonTokenStream(lexer);
-            kukulkanParser parser = new kukulkanParser(tokenStream);
-            Select_statementContext selectStatemet = parser.select_statement();
+            InputStream inputStream = Main.class.getResourceAsStream("/db.sql");
+            kukulkanLexer lexer = new kukulkanLexer(CharStreams.fromStream(inputStream));
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            kukulkanParser parser = new kukulkanParser(tokenStream);            
         } catch (IOException e) {
             e.printStackTrace();
         }
