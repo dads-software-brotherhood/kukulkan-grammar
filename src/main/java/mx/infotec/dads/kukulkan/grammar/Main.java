@@ -1,34 +1,31 @@
+
 package mx.infotec.dads.kukulkan.grammar;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Lexer;
-import org.antlr.v4.runtime.TokenStream;
 
-import mx.infotec.dads.kukulkan.grammar.parser.kukulkanLexer;
-import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser;
-import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Between_expressionContext;
-import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Select_clauseContext;
-import mx.infotec.dads.kukulkan.grammar.parser.kukulkanParser.Select_statementContext;
-
-/**
- * Main class for Test the grammar
- * 
- * @author Daniel Cortes Pichardo
- *
- */
 public class Main {
-    public static void main(String[] args) {
-        try {
-            InputStream inputStream = Main.class.getResourceAsStream("/db.sql");
-            kukulkanLexer lexer = new kukulkanLexer(CharStreams.fromStream(inputStream));
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-            kukulkanParser parser = new kukulkanParser(tokenStream);            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    private static final String EXTENSION = "3k";
+
+    public static void main(String[] args) throws IOException {
+        String program = args.length > 1 ? args[1] : "test/test." + EXTENSION;
+
+        System.out.println("Interpreting file " + program);
+
+        kukulkanLexer lexer = new kukulkanLexer(new ANTLRFileStream(program));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        kukulkanParser parser = new kukulkanParser(tokens);
+
+        kukulkanParser.StartContext tree = parser.start();
+
+        kukulkanCustomVisitor visitor = new kukulkanCustomVisitor();
+        visitor.visit(tree);
+
+        System.out.println("Interpretation finished");
+
     }
+
 }
