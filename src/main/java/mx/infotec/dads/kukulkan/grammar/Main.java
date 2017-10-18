@@ -19,7 +19,7 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         kukulkanParser parser = new kukulkanParser(tokens);
 
-        kukulkanParser.StartContext tree = parser.start();
+        kukulkanParser.DomainModelContext tree = parser.domainModel();
 
         kukulkanCustomVisitor visitor = new kukulkanCustomVisitor();
         visitor.visit(tree);

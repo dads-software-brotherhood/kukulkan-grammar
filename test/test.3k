@@ -1,1 +1,16 @@
-hello world
+entity Usuario {
+    nombre String required minlength(223),
+    edad Integer,
+    numeroCredencial Long,
+    sueldo BigDecimal,
+    impuesto Float,
+    impuestoDetalle Double,
+    ativo Boolean,
+    fechaLocalDate LocalDate,
+    fechaZoneDateTime ZonedDateTime,
+    imagen Blob,
+    imagenAnyBlob AnyBlob,
+    imagenBlob ImageBlob,
+    desc TextBlob,
+    instante Instant
+}
