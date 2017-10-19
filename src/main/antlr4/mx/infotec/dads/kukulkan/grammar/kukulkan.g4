@@ -18,7 +18,7 @@ entity:
 	'}')?;
 
 entityField:
-	name=ID type=fieldType;
+	ID fieldType;
 
 fieldType:
 	  stringFieldType 
@@ -29,25 +29,25 @@ fieldType:
 	| entityType;
 
 entityType:
-	element=entity;
+	entity;
 
 stringFieldType:
-	element=stringType validators+=stringValidators*;
+	stringType stringValidators*;
 
 stringType:
-	element='String';
+	'String';
 
 numericFieldType:
-	element=numericTypes validators+=numericValidators*;
+	numericTypes numericValidators*;
 
 numericTypes:
 	INTEGER | LONG | BIG_DECIMAL | FLOAT | DOUBLE;
 
 booleanFieldType:
-	element=booleanType validators+=requiredValidator*;
+	booleanType requiredValidator*;
 
 booleanType:
-	element='Boolean';
+	'Boolean';
 
 dateFieldType:
 	dateTypes requiredValidator?;
@@ -56,7 +56,7 @@ dateTypes:
 	DATE | LOCAL_DATE | ZONED_DATETIME | INSTANT;
 	
 blobFieldType:
-	element=blobTypes validators+=blobValidators*;
+	blobTypes validators+=blobValidators*;
 
 blobTypes:
 	BLOB | ANY_BLOB	| IMAGE_BLOB | TEXT_BLOB;
@@ -66,39 +66,39 @@ blobTypes:
  * ========================================================================= */
 stringValidators:
 	requiredValidator |
-	minlength=minLengthValidator |
-	maxlength=maxLengthValidator |
-	pattern=patternValidator;
+	minLengthValidator |
+	maxLengthValidator |
+	patternValidator;
 
 numericValidators:
 	requiredValidator | 
-	min=minValidator | 
-	max=maxValidator;
+	minValidator | 
+	maxValidator;
 
 blobValidators:
 	requiredValidator |
-	minbytes=minBytesValidator | 
-	maxbytes=maxBytesValidator;
+	minBytesValidator | 
+	maxBytesValidator;
 
 requiredValidator: 'required'?;
 
 minLengthValidator:
-	'minlength' '(' value=NUMERIC_VALUE ')';
+	'minlength' '(' NUMERIC_VALUE ')';
 
 maxLengthValidator:
-	'maxlength' '(' value=NUMERIC_VALUE ')';
+	'maxlength' '(' NUMERIC_VALUE ')';
 
 patternValidator:
-	'pattern' '(' value=NUMERIC_VALUE ')';
+	'pattern' '(' NUMERIC_VALUE ')';
 
 minValidator:
-	'min' '(' value=NUMERIC_VALUE ')';
+	'min' '(' NUMERIC_VALUE ')';
 
 maxValidator:
-	'max' '(' value=NUMERIC_VALUE ')';
+	'max' '(' NUMERIC_VALUE ')';
 
 minBytesValidator:
-	'minbytes' '(' value=NUMERIC_VALUE ')';
+	'minbytes' '(' NUMERIC_VALUE ')';
 
 maxBytesValidator:
 	'maxbytes' '(' value=NUMERIC_VALUE ')';
