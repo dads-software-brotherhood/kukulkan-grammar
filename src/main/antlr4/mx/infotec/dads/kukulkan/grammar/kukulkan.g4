@@ -1,10 +1,11 @@
 grammar kukulkan;
 
-// Domain Model
+// Domain Model Rule
 
 domainModel
 :
-	entity+
+	entities += entity+
+	| settings += option
 ;
 
 /* =========================================================================
@@ -12,16 +13,16 @@ domainModel
  * ========================================================================= */
 entity
 :
-	'entity' ID
+	'entity' name = ID
 	(
-		'(' ID ')'
+		'(' tableName = ID ')'
 	)?
 	(
 		'{'
 		(
-			entityField
+			fields += entityField
 			(
-				','? entityField
+				','? fields += entityField
 			)*
 		)? '}'
 	)?
@@ -29,7 +30,7 @@ entity
 
 entityField
 :
-	ID fieldType
+	id = ID type = fieldType
 ;
 
 fieldType
@@ -49,7 +50,7 @@ entityType
 
 stringFieldType
 :
-	stringType stringValidators*
+	name = stringType constraints += stringValidators*
 ;
 
 stringType
@@ -59,7 +60,7 @@ stringType
 
 numericFieldType
 :
-	numericTypes numericValidators*
+	name = numericTypes constraints += numericValidators*
 ;
 
 numericTypes
@@ -98,7 +99,7 @@ DOUBLE
 
 booleanFieldType
 :
-	BOOLEAN_TYPE requiredValidator*
+	BOOLEAN_TYPE required=requiredValidator*
 ;
 
 BOOLEAN_TYPE
@@ -108,7 +109,7 @@ BOOLEAN_TYPE
 
 dateFieldType
 :
-	dateTypes requiredValidator?
+	type=dateTypes required=requiredValidator?
 ;
 
 dateTypes
@@ -141,7 +142,7 @@ INSTANT
 
 blobFieldType
 :
-	blobTypes blobValidators*
+	name=blobTypes constraints+=blobValidators*
 ;
 
 blobTypes
@@ -177,24 +178,24 @@ TEXT_BLOB
  * ========================================================================= */
 stringValidators
 :
-	requiredValidator
-	| minLengthValidator
-	| maxLengthValidator
-	| patternValidator
+	required=requiredValidator
+	| minLenght=minLengthValidator
+	| maxLenght=maxLengthValidator
+	| pattern=patternValidator
 ;
 
 numericValidators
 :
-	requiredValidator
-	| minValidator
-	| maxValidator
+	required=requiredValidator
+	| minValue=minValidator
+	| maxValue=maxValidator
 ;
 
 blobValidators
 :
-	requiredValidator
-	| minBytesValidator
-	| maxBytesValidator
+	required=requiredValidator
+	| minBytesValue=minBytesValidator
+	| maxBytesValue=maxBytesValidator
 ;
 
 requiredValidator
@@ -243,6 +244,31 @@ cardinality
 	| MANY_TO_ONE
 	| ONE_TO_ONE
 	| MANY_TO_MANY
+;
+
+/* =========================================================================
+ * OPTION 
+ * ========================================================================= */
+option
+:
+	setting = optionSetting
+;
+
+optionSetting
+:
+	dtoOption
+;
+/* =========================================================================
+ * DTO OPTION 
+ * ========================================================================= */
+dtoOption
+:
+	'dto'?
+;
+
+dtoType
+:
+	'mapstruct'
 ;
 
 WS

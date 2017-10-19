@@ -1,4 +1,3 @@
-
 package mx.infotec.dads.kukulkan.grammar;
 
 import java.io.IOException;
@@ -23,9 +22,7 @@ public class Main {
 
         kukulkanCustomVisitor visitor = new kukulkanCustomVisitor();
         visitor.visit(tree);
-
         System.out.println("Interpretation finished");
-
     }
 
 }

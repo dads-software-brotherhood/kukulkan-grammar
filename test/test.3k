@@ -1,5 +1,5 @@
 entity Usuario (usuarios){
-    nombre String,
+    nombre String required,
     edad Integer,
     numeroCredencial Long,
     sueldo BigDecimal,
