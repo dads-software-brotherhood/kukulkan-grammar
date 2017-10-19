@@ -1,5 +1,22 @@
-entity Usuario {
-    nombre String required minlength(223),
+entity Usuario (usuarios){
+    nombre String,
+    edad Integer,
+    numeroCredencial Long,
+    sueldo BigDecimal,
+    impuesto Float,
+    impuestoDetalle Double,
+    ativo Boolean,
+    fechaLocalDate LocalDate,
+    fechaZoneDateTime ZonedDateTime,
+    imagen Blob,
+    imagenAnyBlob AnyBlob,
+    imagenBlob ImageBlob,
+    desc TextBlob,
+    instante Instant
+}
+
+entity Persona {
+    nombre String,
     edad Integer,
     numeroCredencial Long,
     sueldo BigDecimal,

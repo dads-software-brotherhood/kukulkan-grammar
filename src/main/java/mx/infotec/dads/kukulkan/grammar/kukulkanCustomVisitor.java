@@ -1,14 +1,17 @@
 
 package mx.infotec.dads.kukulkan.grammar;
 
-import org.antlr.v4.runtime.tree.ParseTree;
-
+/**
+ * KukulkanCustomVisitor, this is the main visitor for kukulkan grammar
+ * 
+ * @author Daniel Cortes Pichardo
+ *
+ */
 public class kukulkanCustomVisitor extends kukulkanBaseVisitor<Object> {
-
     @Override
-    public Object visit(ParseTree tree) {
-        System.out.println(tree.getText());
-        return tree.accept(this);
+    public Object visitEntity(kukulkanParser.EntityContext ctx) {
+        ctx.entityField().forEach(field -> {
+        });
+        return visitChildren(ctx);
     }
-
 }
