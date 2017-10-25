@@ -188,7 +188,7 @@ DOUBLE
  */
 booleanFieldType
 :
-	name= BOOLEAN_TYPE constraints=requiredValidator*
+	name= BOOLEAN_TYPE required=requiredValidator*
 ;
 
 /** 

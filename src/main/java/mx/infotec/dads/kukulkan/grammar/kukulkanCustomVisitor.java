@@ -42,9 +42,16 @@ public class kukulkanCustomVisitor extends kukulkanBaseVisitor<Object> {
             System.out.print(type.numericFieldType().name.getText());
             processNumericConstraints(type.numericFieldType().constraints);
         } else if (type.booleanFieldType() != null) {
-            processNumericConstraints(type.booleanFieldType().constraints);
+            System.out.print(type.booleanFieldType().name.getText()+" ");
+            if (type.booleanFieldType().required != null) {
+                System.out.print(type.booleanFieldType().required.getText());
+            }
+
         } else if (type.dateFieldType() != null) {
             processDataFieldType(type.dateFieldType().type);
+            if (type.dateFieldType().required != null) {
+                System.out.println("" + type.dateFieldType().required.getText());
+            }
         } else if (type.blobFieldType() != null) {
             processBlobConstraint(type.blobFieldType().constraints);
         } else {
@@ -69,7 +76,6 @@ public class kukulkanCustomVisitor extends kukulkanBaseVisitor<Object> {
     }
 
     private static void processNumericConstraints(RequiredValidatorContext ctx) {
-        // TODO Auto-generated method stub
 
     }
 

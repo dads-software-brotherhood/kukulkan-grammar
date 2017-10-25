@@ -5,7 +5,7 @@ entity Usuario (usuarios){
     sueldo BigDecimal,
     impuesto Float,
     impuestoDetalle Double,
-    ativo Boolean,
+    activo Boolean required,
     fechaLocalDate LocalDate,
     fechaZoneDateTime ZonedDateTime,
     imagen Blob,
