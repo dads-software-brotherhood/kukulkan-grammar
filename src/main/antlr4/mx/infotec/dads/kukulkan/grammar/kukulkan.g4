@@ -357,7 +357,7 @@ maxLengthValidator
 
 patternValidator
 :
-	'pattern' '(' NUMERIC_VALUE ')'
+	'pattern' '(' PATTERN_VALUE ')'
 ;
 
 minValidator
@@ -431,6 +431,11 @@ LINE_COMMENT
 NUMERIC_VALUE
 :
 	[0-9]+
+;
+
+PATTERN_VALUE
+:
+	(~ ["\\])*
 ;
 
 ID

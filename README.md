@@ -1,5 +1,6 @@
-# Configuration for Linux
+# Building
 
+	mvn clean install
 
 # Other references
 
