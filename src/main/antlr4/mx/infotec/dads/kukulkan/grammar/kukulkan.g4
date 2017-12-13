@@ -435,7 +435,7 @@ NUMERIC_VALUE
 
 PATTERN_VALUE
 :
-	(~ ["\\])*
+	'"' .*? '"'
 ;
 
 ID
